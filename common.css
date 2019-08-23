@@ -1,0 +1,42 @@
+:root{
+  --base-hue: 185;
+  --base-sat: 75%;
+  --base-lit: 76%;
+  --main-color: hsl(var(--base-hue), var(--base-sat), var(--base-lit));
+  --main-color-accent-1: hsl(var(--base-hue), calc(var(--base-sat) - 18%), calc(var(--base-lit) - 18%));
+  --main-color-accent-2: hsl(var(--base-hue), calc(var(--base-sat) - 25%), calc(var(--base-lit) - 27%));
+  --main-color-accent-3: hsl(var(--base-hue), calc(var(--base-sat) - 31%), calc(var(--base-lit) - 36%));
+  --main-color-accent-4: hsl(var(--base-hue), calc(var(--base-sat) - 38%), calc(var(--base-lit) - 44%));
+}
+body{
+  margin: 0;
+  padding: 0;
+  background: var(--main-color);
+  font-family: 'Helvetica', sans-serif;
+  text-align: center;
+}
+.container{
+  display: flex;
+  flex-flow: column;
+  padding: 0 4em;
+}
+.container > * {
+  margin-top: 1em;
+}
+input{
+  background: var(--main-color-accent-2);
+  color: white;
+  border: 0;
+  padding: 1.1em;
+  transition: background .1s ease-in-out;
+  text-align: center;
+}
+input:hover{
+  background: var(--main-color-accent-3);
+}
+input[type="text"]:hover{
+  background: var(--main-color-accent-2);
+}
+input:active{
+  background: var(--main-color-accent-4);
+}
