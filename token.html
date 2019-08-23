@@ -17,38 +17,6 @@
         align-self: center;
         border-radius: .25em;
       }
-      #popup-container{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity .1s;
-      }
-      #popup-container.active{
-        opacity: 1;
-        pointer-events: initial;
-      }
-      .popup-bg{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: hsla(0,0%,0%, 70%);
-      }
-      .popup{
-        width: 60%;
-        background: hsl(0, 0%, 90%);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -100%);
-        padding: 0 1em 1em 1em;
-      }
       #popup-title{
         border-bottom: 1px solid hsl(0, 0%, 70%);
         padding-bottom: .3em;
@@ -102,7 +70,7 @@
       <input type="text" maxlength="8" id="nim" placeholder="NIM" name="nim">
       <input type="text" maxlength="4" id="token" placeholder="Token" name="token">
       <input type="button" value="Start" id="submit">
-      <div id="popup-container">
+      <div class="popup-container">
         <div class="popup-bg"></div>
         <div class="popup">
           <h3 id="popup-title"></h3>
