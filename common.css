@@ -1,42 +1,58 @@
 :root{
-  --base-hue: 185;
-  --base-sat: 75%;
-  --base-lit: 76%;
+  --base-hue: 0;
+  --base-sat: 83%;
+  --base-lit: 83%;
   --main-color: hsl(var(--base-hue), var(--base-sat), var(--base-lit));
   --main-color-accent-1: hsl(var(--base-hue), calc(var(--base-sat) - 18%), calc(var(--base-lit) - 18%));
-  --main-color-accent-2: hsl(var(--base-hue), calc(var(--base-sat) - 25%), calc(var(--base-lit) - 27%));
-  --main-color-accent-3: hsl(var(--base-hue), calc(var(--base-sat) - 31%), calc(var(--base-lit) - 36%));
-  --main-color-accent-4: hsl(var(--base-hue), calc(var(--base-sat) - 38%), calc(var(--base-lit) - 44%));
+  --main-color-accent-2: hsl(var(--base-hue), var(--base-sat), calc(var(--base-lit) - 27%));
+  --main-color-accent-3: hsl(var(--base-hue), var(--base-sat), calc(var(--base-lit) - 36%));
+  --main-color-accent-4: hsl(var(--base-hue), var(--base-sat), calc(var(--base-lit) - 44%));
 }
 body{
   margin: 0;
   padding: 0;
-  background: var(--main-color);
+  background: url("background2.png");
+  background-size : auto; 
   font-family: 'PT Sans', sans-serif;
   text-align: center;
 }
+
 .container{
   display: flex;
+  height: 100vh;
   flex-flow: column;
   padding: 0 4em;
-}
-.container > * {
-  margin-top: 1em;
+  align-items: center;
+  justify-content: center;
 }
 input{
   background: var(--main-color-accent-2);
-  color: white;
+  color: whitesmoke;
   border: 0;
   padding: 1.1em;
   transition: background .1s ease-in-out;
   text-align: center;
 }
+
 input:hover{
-  background: var(--main-color-accent-3);
+  background-color:var(--main-color-accent-3);
 }
 input[type="text"]:hover{
-  background: var(--main-color-accent-2);
+  background: whitesmoke;
 }
+
 input:active{
   background: var(--main-color-accent-4);
+}
+
+.boxed{
+  padding: .3em;
+  background: var(--main-color-accent-3);
+  color: white;
+  width: max-content;
+}
+
+.center{
+  text-align: center;
+  align-self: center;
 }
