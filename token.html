@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="common.css">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet"> 
     <style>
-      #token{
+      #token, #nim{
         font-size: 1.8em;
         padding: .4em;
       }
@@ -68,7 +68,8 @@
   <body>
     <div class="container" id="token-page">
       <h1>Input Token</h1>
-      <input type="text" maxlength="4" id="token" placeholder="Token">
+      <input type="text" maxlength="8" id="nim" placeholder="NIM" name="nim">
+      <input type="text" maxlength="4" id="token" placeholder="Token" name="token">
       <input type="button" value="Next" id="submit">
       <div id="popup-container">
         <div class="popup-bg"></div>
