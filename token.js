@@ -1,13 +1,13 @@
 let tokenInput = document.querySelector('#token');
 let submit = document.querySelector('#submit');
-let popup = document.querySelector('#popup-container');
+let popup = document.querySelector('.popup-container');
 let popupTitle = document.querySelector('#popup-title');
 let popupContent = document.querySelector('#popup-content');
 
 submit.addEventListener('click', ()=>{
   let token = sanitize(tokenInput.value);
   if(token.length < 4){
-    showPopup(
+    showPopupContent(
       'Error!',
       'Token should be exactly 4 alphanumeric characters.');
     return;
@@ -15,23 +15,26 @@ submit.addEventListener('click', ()=>{
   ajaxPromise('http://127.0.0.1:5000/checktoken', JSON.stringify({"token": token}))
     .then((data)=>{
       if(data['code'] == 1){ // our code 1 means error, show popup
-        showPopup('Error!', data['return']);
+        showPopupContent('Error!', data['return']);
       }
       else if(data['code']==4){ // our code 4 means OK, proceed
-        showPopup('Success!', data['return']);
+        showPopupContent('Success!', data['return']);
+        window.setTimeout(()=>{
+          window.location.href = '/vote.html';
+        }, 1000);
       }
     }).catch((error) => {
-      showPopup('Error!', error);
+      showPopupContent('Error!', error);
     });
 });
 
-function showPopup(title, content){
+function showPopupContent(title, content){
   popupTitle.innerText = title;
   popupContent.innerHTML = content;
-  popup.classList.add('active');
+  showPopup(popup);
 }
 popup.addEventListener('click', ()=>{
-  popup.classList.remove('active');
+  unPopup(popup);
 });
 
 function sanitize(text){

@@ -1,42 +1,216 @@
 :root{
-  --base-hue: 185;
-  --base-sat: 75%;
-  --base-lit: 76%;
+  --base-hue: 0;
+  --base-sat: 83%;
+  --base-lit: 83%;
   --main-color: hsl(var(--base-hue), var(--base-sat), var(--base-lit));
   --main-color-accent-1: hsl(var(--base-hue), calc(var(--base-sat) - 18%), calc(var(--base-lit) - 18%));
-  --main-color-accent-2: hsl(var(--base-hue), calc(var(--base-sat) - 25%), calc(var(--base-lit) - 27%));
-  --main-color-accent-3: hsl(var(--base-hue), calc(var(--base-sat) - 31%), calc(var(--base-lit) - 36%));
-  --main-color-accent-4: hsl(var(--base-hue), calc(var(--base-sat) - 38%), calc(var(--base-lit) - 44%));
+  --main-color-accent-2: hsl(var(--base-hue), var(--base-sat), calc(var(--base-lit) - 27%));
+  --main-color-accent-3: hsl(var(--base-hue), var(--base-sat), calc(var(--base-lit) - 36%));
+  --main-color-accent-4: hsl(var(--base-hue), var(--base-sat), calc(var(--base-lit) - 44%));
 }
 body{
   margin: 0;
   padding: 0;
-  background: var(--main-color);
+  background: url("background2.png");
+  background-size : auto; 
   font-family: 'PT Sans', sans-serif;
   text-align: center;
 }
+
+.popup-bg{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: hsla(0,0%,0%, 70%);
+}
+.popup{
+  width: 60%;
+  background: hsl(0, 0%, 90%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  padding: 0 1em 1em 1em;
+  border-radius: .2em;
+}
+.popup-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .1s;
+}
+.popup-container.active{
+  opacity: 1;
+  pointer-events: initial;
+}
+.popup-title{
+  width: 100%;
+  margin: 0;
+  background: var(--main-color-accent-3);
+  color: whitesmoke;
+}
+
 .container{
   display: flex;
+  height: 100vh;
   flex-flow: column;
   padding: 0 4em;
-}
-.container > * {
-  margin-top: 1em;
+  align-items: center;
+  justify-content: center;
 }
 input{
   background: var(--main-color-accent-2);
-  color: white;
+  color: whitesmoke;
   border: 0;
   padding: 1.1em;
   transition: background .1s ease-in-out;
   text-align: center;
 }
+
 input:hover{
-  background: var(--main-color-accent-3);
+  background-color:var(--main-color-accent-3);
 }
 input[type="text"]:hover{
-  background: var(--main-color-accent-2);
+  background: whitesmoke;
 }
+
 input:active{
   background: var(--main-color-accent-4);
+}
+
+.boxed{
+  padding: .3em;
+  background: var(--main-color-accent-3);
+  color: white;
+  width: max-content;
+}
+
+.center{
+  text-align: center;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.card{
+  width: 12.5vw;
+  height: 15em;
+  background: white;
+  border-radius: .3em;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-ornament{
+  display: flex;
+  flex-flow: column;
+  position: absolute;
+}
+.card-number{
+  position: absolute;
+  left: .5em;
+  top: 1.6em;
+}
+.card-label{
+  position: absolute;
+  left: .2em;
+  top: .1em;
+  font-size: 1.6em;
+  font-weight: bolder;
+}
+
+.card-content{
+  width: 73%;
+  height: 80%;
+  border: .1em solid red;
+  display: flex;
+  flex-flow: column;
+}
+.rotated{
+  transform: rotate(180deg);
+}
+.bottom{
+  bottom: 0;
+}
+.top{
+  top: 0;
+}
+.bottom, .top{
+  left: 0;
+  right: 0;
+}
+
+.card-number, .card-label{
+  color: red;
+  font-family: serif;
+}
+
+.logodoang{
+  width: 1.3em;
+  position: absolute;
+  top: .4em;
+  right: .3em;
+}
+
+.muka-container{
+  width: 100%;
+  height: 0;
+  display: block;
+  padding-top: 100%;
+  position: relative;
+}
+.muka{
+  border-bottom: .1em solid  red;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.nama{
+  color: red;
+  font-family: 'Helvetica', sans-serif;
+}
+
+.flex{
+  display: flex;
+}
+
+.caketang.card{
+  cursor: pointer;
+}
+
+.card-container{
+  width: 100%;
+}
+.card-list{
+  flex-flow: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.notice{
+  padding: 0;
+  flex-flow: column;
+  padding-bottom: .5em;
+}
+
+.padding{
+  padding-top: .5em;
+}
+
+.space{
+  justify-content: space-around;
+  align-self: initial;
 }

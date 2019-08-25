@@ -7,45 +7,15 @@
     <style>
       #token, #nim{
         font-size: 1.8em;
-        padding: .4em;
+        padding: .2em;
       }
       #submit{
+        margin-top: .4em;
         font-size: 3em;
         padding: .3em .4em;
-        width: fit-content;
+        width: 10em;
         align-self: center;
-      }
-      #popup-container{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity .1s;
-      }
-      #popup-container.active{
-        opacity: 1;
-        pointer-events: initial;
-      }
-      .popup-bg{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: hsla(0,0%,0%, 70%);
-      }
-      .popup{
-        width: 60%;
-        background: hsl(0, 0%, 90%);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -100%);
-        padding: 0 1em 1em 1em;
+        border-radius: .25em;
       }
       #popup-title{
         border-bottom: 1px solid hsl(0, 0%, 70%);
@@ -62,16 +32,45 @@
       #popup-title, #popup-content, #popup-tip{
         cursor: default;
       }
+      input[type="text"] { 
+        color: black;
+        margin: 10px auto;
+        border-radius: 12px;
+        max-width: 7em;
+        background-color: white;
+      }
+      .header {
+        margin: 1em auto;
+        color: #f90006;
+        width: 600px;
+      }
+      #stei-logo-red{
+        width: 28vw;
+      }
+      .overlay{
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        overflow: auto;
+        top: 0px;
+        left: 0px;
+        background: rgba(0, 0, 0, 0.25);
+      }
     </style>
     <script src="common.js"></script>
   </head>
   <body>
+    <div class="overlay"></div>
     <div class="container" id="token-page">
-      <h1>Input Token</h1>
+      <div class="header">
+        <img id="stei-logo-red" src="/logoh.png">
+        <h1>Pemilihan Ketua Angkatan</h1>
+      </div>
       <input type="text" maxlength="8" id="nim" placeholder="NIM" name="nim">
       <input type="text" maxlength="4" id="token" placeholder="Token" name="token">
-      <input type="button" value="Next" id="submit">
-      <div id="popup-container">
+      <input type="button" value="Start" id="submit">
+      <div class="popup-container">
         <div class="popup-bg"></div>
         <div class="popup">
           <h3 id="popup-title"></h3>

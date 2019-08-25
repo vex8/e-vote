@@ -21,3 +21,10 @@ function ajaxPromise(endpoint, data){
   });
   return promise;
 }
+
+function showPopup(popupEl){
+  popupEl.classList.add('active');
+}
+function unPopup(popupEl){
+  popupEl.classList.remove('active');
+}
