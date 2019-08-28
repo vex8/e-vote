@@ -1,8 +1,10 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
   <head>
     <title>Token</title>
-    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="{% static "common.css" %}">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet"> 
     <style>
       #token, #nim{
@@ -58,17 +60,21 @@
         background: rgba(0, 0, 0, 0.25);
       }
     </style>
-    <script src="common.js"></script>
+    <script src="{% static "common.js" %}"></script>
   </head>
   <body>
+    {% block content %}
     <div class="overlay"></div>
     <div class="container" id="token-page">
       <div class="header">
-        <img id="stei-logo-red" src="/logoh.png">
+        <img id="stei-logo-red" src="{% static "logoh.png" %}">
         <h1>Pemilihan Ketua Angkatan</h1>
       </div>
       <input type="text" maxlength="8" id="nim" placeholder="NIM" name="nim">
-      <input type="text" maxlength="4" id="token" placeholder="Token" name="token">
+      <form method="POST">
+        {% csrf_token %}
+        <input type="text" maxlength="4" id="token" placeholder="Token" name="token">
+      </form>
       <input type="button" value="Start" id="submit">
       <div class="popup-container">
         <div class="popup-bg"></div>
@@ -79,6 +85,7 @@
         </div>
       </div>
     </div>
-    <script src="token.js"></script>
+    <script src="{% static "token.js" %}"></script>
+    {% endblock %}
   </body>
 </html>

@@ -1,7 +1,10 @@
+let base_endpoint = "http://127.0.0.1:8000";
+
 function ajaxPromise(endpoint, data){
   let promise = new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest();
     xhr.open('POST',endpoint , true);
+    xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
     xhr.onreadystatechange = () => {
       if(xhr.readyState == xhr.DONE){
         if(xhr.status == 200){
@@ -20,6 +23,15 @@ function ajaxPromise(endpoint, data){
     xhr.send(data);
   });
   return promise;
+}
+
+function getCookie(cookie){
+  let cookies = document.cookie.split(';');
+  var value = '';
+  cookies.forEach((e)=>{
+    if(e.startsWith(cookie)){ value = e.substring(cookie.length+1); }
+  });
+  return value;
 }
 
 function showPopup(popupEl){

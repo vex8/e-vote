@@ -1,4 +1,5 @@
 let tokenInput = document.querySelector('#token');
+let nimInput = document.querySelector('#nim');
 let submit = document.querySelector('#submit');
 let popup = document.querySelector('.popup-container');
 let popupTitle = document.querySelector('#popup-title');
@@ -6,13 +7,19 @@ let popupContent = document.querySelector('#popup-content');
 
 submit.addEventListener('click', ()=>{
   let token = sanitize(tokenInput.value);
+  let nim = nimInput.value;
   if(token.length < 4){
     showPopupContent(
       'Error!',
       'Token should be exactly 4 alphanumeric characters.');
     return;
   }
-  ajaxPromise('http://127.0.0.1:5000/checktoken', JSON.stringify({"token": token}))
+  ajaxPromise('/checktoken', JSON.stringify(
+    {
+      "token": token,
+      "nim": nim
+    }
+    ))
     .then((data)=>{
       if(data['code'] == 1){ // our code 1 means error, show popup
         showPopupContent('Error!', data['return']);
@@ -20,7 +27,7 @@ submit.addEventListener('click', ()=>{
       else if(data['code']==4){ // our code 4 means OK, proceed
         showPopupContent('Success!', data['return']);
         window.setTimeout(()=>{
-          window.location.href = '/vote.html';
+          window.location.href = '/vote';
         }, 1000);
       }
     }).catch((error) => {
