@@ -25,11 +25,12 @@ function ajaxPromise(endpoint, data){
   return promise;
 }
 
-function getCookie(cookie){
+function getCookie(name){
   let cookies = document.cookie.split(';');
   var value = '';
   cookies.forEach((e)=>{
-    if(e.startsWith(cookie)){ value = e.substring(cookie.length+1); }
+    e = e.trim();
+    if(e.startsWith(name)){ value = e.substring(name.length+1); }
   });
   return value;
 }
