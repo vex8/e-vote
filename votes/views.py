@@ -32,7 +32,7 @@ def submit_vote(request):
     data = json.loads(request.body)
     if len(data) > 0:
         submit_date = datetime.now()
-        currentVote = data['currentVote']
+        currentVote = data['current_vote']
         nim = data['nim']
         token = data['token']
         response = JsonResponse({'nim':nim, 'token':token, 'pub_date':submit_date, 'currentVote':currentVote})

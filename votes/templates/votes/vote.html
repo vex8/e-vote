@@ -226,7 +226,7 @@
                     tokenValue = getCookie('token')
                     if(yes){
                         ajaxPromise('/submitvote', JSON.stringify(
-                            { 'nim':nimValue, 'token':tokenValue,'currentvote': currentVote }
+                            { 'nim':nimValue, 'token':tokenValue,'current_vote': currentVote }
                         )).then(()=>{
                             window.location.href = '/token';
                         });
