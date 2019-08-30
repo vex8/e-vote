@@ -29,7 +29,7 @@ def check_token(request):
     return response
 
 def submit_vote(request):
-    data = json.loads(request)
+    data = json.loads(request.body)
     if len(data) > 0:
         submit_date = datetime.now()
         currentVote = data['currentVote']
