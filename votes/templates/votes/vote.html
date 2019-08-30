@@ -219,8 +219,13 @@
                 if(e.target.closest('.popup')){
                     let yes = e.target.closest('#yes');
                     let no = e.target.closest('#no');
+                    nimValue = getCookie('nim')
+                    tokenValue = getCookie('token')
                     if(yes){
-                        
+                        ajaxPromise('/submitvote', JSON.stringify(
+                            { 'nim':nimValue, 'token':tokenValue,'currentvote': currentVote }
+                        ));
+                        window.location.href = '/token';
                     }
                     else if(no){
                     }

@@ -2,7 +2,8 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from .models import Caketang, Pemilih 
 from django.core import serializers
-import json, DateTime
+import json 
+from datetime import datetime
 
 def index(request):
     return render(request, 'votes/token.html', None)
@@ -29,8 +30,12 @@ def check_token(request):
 
 def submit_vote(request):
     data = json.loads(request)
-    if data != None:
-        submit_date = DateTime.now()
-
+    if len(data) > 0:
+        submit_date = datetime.now()
+        currentVote = data['currentVote']
+        nim = data['nim']
+        token = data['token']
+        response = JsonResponse({'nim':nim, 'token':token, 'pub_date':submit_date, 'currentVote':currentVote})
+        return response
 
 # Create your views here.

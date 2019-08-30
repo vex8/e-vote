@@ -17,7 +17,7 @@ submit.addEventListener('click', ()=>{
   ajaxPromise('/checktoken', JSON.stringify(
     {
       "token": token,
-      "nim": nim
+      "nim": nim  
     }
     ))
     .then((data)=>{
