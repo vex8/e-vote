@@ -1,16 +1,24 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Caketang, Pemilih, Token
 from django.core import serializers
 from django.contrib.admin.views.decorators import staff_member_required
 import json 
 from datetime import datetime
 import binascii, os
+import re
 
 def index(request):
+    return redirect('token')
+
+def token(request):
     return render(request, 'votes/token.html', None)
 
 def vote(request):
+    nimCookie = request.COOKIES.get('nim')
+    tokenCookie = request.COOKIES.get('token')
+    if nimCookie == None and tokenCookie == None:
+        return redirect('token')
     cktJson = serializers.serialize('json',Caketang.objects.all())
     cktContext = { 'caketangJSON': cktJson }
     return render(request, 'votes/vote.html', cktContext)
@@ -48,9 +56,10 @@ def submit_vote(request):
         current_token = Token.objects.get(token=token)
         current_token.used = True
         current_token.save()
-        ckt = Pemilih(nim=nim, token=current_token, date=submit_date, vote=currentVote)
-        ckt.save()
-        response = JsonResponse({'nim':nim, 'token':token, 'pub_date':submit_date, 'currentVote':currentVote})
+        ckt = Caketang.objects.get(pk=currentVote)
+        pil = Pemilih(nim=nim, token=current_token, date=submit_date, vote=ckt)
+        pil.save()
+        response = JsonResponse({'nim':nim, 'token':token, 'pub_date':submit_date, 'currentVote':currentVote, 'redirect_to': '/'})
         response.delete_cookie('nim')
         response.delete_cookie('token')
         return response
