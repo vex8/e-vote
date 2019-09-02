@@ -227,7 +227,9 @@
                     if(yes){
                         ajaxPromise('/submitvote', JSON.stringify(
                             { 'nim':nimValue, 'token':tokenValue,'current_vote': currentVote }
-                        )).then(()=>{
+                        )).then((data)=>{
+                            console.log(data);
+                            alert(data.current_vote);
                             window.location.href = '/token';
                         });
                     }

@@ -5,7 +5,14 @@ let popup = document.querySelector('.popup-container');
 let popupTitle = document.querySelector('#popup-title');
 let popupContent = document.querySelector('#popup-content');
 
-submit.addEventListener('click', ()=>{
+submit.addEventListener('click', send);
+tokenInput.addEventListener('keydown', (e)=>{
+  if(e.keyCode == 13){
+    e.preventDefault();
+    send();
+  }
+});
+function send(){
   let token = sanitize(tokenInput.value);
   let nim = nimInput.value;
   if(token.length < 4){
@@ -26,14 +33,12 @@ submit.addEventListener('click', ()=>{
       }
       else if(data['code']==4){ // our code 4 means OK, proceed
         showPopupContent('Success!', data['return']);
-        window.setTimeout(()=>{
-          window.location.href = '/vote';
-        }, 1000);
+        window.location.href = '/vote';
       }
     }).catch((error) => {
       showPopupContent('Error!', error);
     });
-});
+}
 
 function showPopupContent(title, content){
   popupTitle.innerText = title;
