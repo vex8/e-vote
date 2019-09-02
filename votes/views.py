@@ -18,12 +18,12 @@ def vote(request):
 def check_token(request):
     identity = json.loads(request.body)
     token_in_db = Token.objects.filter(token=identity['token'])
-    if len(token_in_db) == 1:
-        nim_in_db = Pemilih.objects.filter(nim=identity['nim'], token__in=token_in_db)
-        if len(nim_in_db) > 0:
-            retcode = 1
-            retmes = 'you have already voted!'
-        elif not token_in_db[0].used:
+    nim_in_db = Pemilih.objects.filter(nim=identity['nim'])
+    if len(nim_in_db) > 0:
+        retcode = 1
+        retmes = 'you have already voted!'
+    elif len(token_in_db) == 1:
+        if not token_in_db[0].used:
             retcode = 4
             retmes = 'success'
         else:
