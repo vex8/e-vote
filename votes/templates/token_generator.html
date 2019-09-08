@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+  <head>
+    <title>DUAR.... TOKEN</title>
+    <script src="{% static "common.js" %}"></script>
+    <style>
+      body{
+        background: red;
+      }
+      #token{
+        font-size: 4em;
+        display: block;
+        text-align: center;
+        background: white;
+        margin-bottom: .1em;
+        height: 1.2em;
+      }
+      #generate{
+        margin: auto;
+        display: block;
+        font-size: 4em;
+        background: aqua;
+        color: black;
+        border: 0;
+      }
+      #generate:hover{
+        background: #1196ff;
+      }
+      #generate:active{
+        background: lightcoral;
+        content: 'duarrrrr';
+      }
+    </style>
+  </head>
+  <body>
+    <span id="token"></span>
+    <input type="button" value="DUAR... DAPET TOKEN" id="generate">
+    <script>
+      let currentToken = '';
+      let token = document.querySelector('#token');
+      let generate = document.querySelector('#generate');
+      generate.addEventListener('click', ()=>{
+        ajaxPromise('/generatetoken', null).then((data) => {
+          console.log(data);
+          currentToken = data['token'];
+          token.innerText = currentToken;
+        });
+      })
+    </script>
+  </body>
+</html>
