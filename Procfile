@@ -1,1 +1,1 @@
-web: gunicorn votes.wsgi
+web: gunicorn evote.wsgi
