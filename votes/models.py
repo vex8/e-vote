@@ -8,7 +8,7 @@ class Token(models.Model):
 
 class Caketang(models.Model):
     nama = models.CharField(max_length = 200)
-    ttl = models.CharField(max_length = 20)
+    ttl = models.CharField(max_length = 40)
     visi = models.TextField()
     misi = models.TextField()
     prestasi = models.TextField()

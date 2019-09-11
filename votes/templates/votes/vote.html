@@ -168,7 +168,7 @@
                     });
                 });
             }
-            let cktJson = JSON.parse('{{ caketangJSON | safe }}');
+            let cktJson = JSON.parse('{{ caketangJSON | safe}}');
             let cktData = Object.keys(cktJson).map((key)=>{
                 return cktJson[key];
             });
