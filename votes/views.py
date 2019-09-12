@@ -26,7 +26,7 @@ def vote(request):
 def check_token(request):
     identity = json.loads(request.body)
     token_in_db = Token.objects.filter(token=identity['token'])
-    nim_in_db = Pemilih.objects.filter(nim=identity['nim'])
+    nim_in_db = Pemilih.objects.filter(nim=identity['nim'], token__isnull=False)
     if len(nim_in_db) > 0:
         retcode = 1
         retmes = 'you have already voted!'

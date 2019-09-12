@@ -26,10 +26,10 @@ if os.path.isfile(dotenv_file):
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '3+1#2&4y&4gjf1ff=dfh+ro*ka3y@%zu@gst2m4^s*fqwa!y$)'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -125,4 +125,5 @@ TATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
 
 django_heroku.settings(locals())
-del DATABASES['default']['OPTIONS']['sslmode']
+
+from .settings_local import *
