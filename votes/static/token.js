@@ -18,7 +18,15 @@ function send(){
   if(token.length < 4){
     showPopupContent(
       'Error!',
-      'Token should be exactly 4 alphanumeric characters.');
+      'Token should be exactly 4 alphanumeric characters.'
+    );
+    return;
+  }
+  if(isNaN(parseInt(nim))){
+    showPopupContent(
+      'Error!',
+      'NIM should be only number'
+    );
     return;
   }
   ajaxPromise('/checktoken', JSON.stringify(
