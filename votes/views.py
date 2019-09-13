@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from .models import Caketang, Pemilih, Token
+from .models import Caketang, Pemilih
 from django.core import serializers
 from django.contrib.admin.views.decorators import staff_member_required
 import json 
@@ -66,13 +66,16 @@ def submit_vote(request):
 
 @staff_member_required
 def generate_token(request):
-    all_tokens = Token.objects.all()
+    niminput = json.loads(request.body["nim"])
+    pemilih = Pemilih.objects.filter(nim = nim) 
+    all_pemilih = Pemilih.objects.all()
     def gen():
         return binascii.hexlify(os.urandom(2)).decode()
     gen_token = gen()
-    while(len(all_tokens.filter(token=gen_token))>0):
+    while(len(all_pemilih.filter(token=gen_token))>0):
         gen_token = gen()
-    Token(token=gen_token).save()
+    pemilih.token = gen_token 
+    pemilih.save()
     return JsonResponse({'token': gen_token})
 
 @staff_member_required

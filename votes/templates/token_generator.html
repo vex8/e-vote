@@ -36,14 +36,16 @@
     </style>
   </head>
   <body>
+    <input type="text" id="niminput">
     <span id="token"></span>
     <input type="button" value="DUAR... DAPET TOKEN" id="generate">
     <script>
+      var niminput = document.querySelector('#niminput');
       let currentToken = '';
       let token = document.querySelector('#token');
       let generate = document.querySelector('#generate');
       generate.addEventListener('click', ()=>{
-        ajaxPromise('/generatetoken', null).then((data) => {
+        ajaxPromise('/generatetoken', JSON.stringify({"nim":niminput.value})).then((data) => {
           console.log(data);
           currentToken = data['token'];
           token.innerText = currentToken;
