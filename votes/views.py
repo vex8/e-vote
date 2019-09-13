@@ -25,21 +25,24 @@ def vote(request):
 
 def check_token(request):
     identity = json.loads(request.body)
-    token_in_db = Token.objects.filter(token=identity['token'])
-    nim_in_db = Pemilih.objects.filter(nim=identity['nim'], token__isnull=False)
-    if len(nim_in_db) > 0:
-        retcode = 1
-        retmes = 'you have already voted!'
-    elif len(token_in_db) == 1:
-        if not token_in_db[0].used:
+    pemilih = Pemilih.objects.filter(nim=identity['nim'])
+    if len(pemilih) > 0:
+        pemilih = pemilih[0]
+        if pemilih.hasvoted == True:
+            retcode = 1
+            retmes = 'You have already voted!'
+        if pemilih.token == '':
+            retcode = 1
+            retmes = 'Invalid token in db, please contact admin'
+        elif pemilih.token == identity['token']:
             retcode = 4
-            retmes = 'success'
+            retmes = 'Success!'
         else:
             retcode = 1
-            retmes = 'token has been used.'
+            retmes = 'Token invalid!'
     else:
         retcode = 1
-        retmes = 'token invalid.'
+        retmes = 'not registered as voter.'
     response = JsonResponse({'code': retcode, 'return': retmes})
     if retcode == 4:
         response.set_cookie('token', identity['token'])
@@ -53,11 +56,10 @@ def submit_vote(request):
         currentVote = data['current_vote']
         nim = data['nim']
         token = data['token']
-        current_token = Token.objects.get(token=token)
-        current_token.used = True
-        current_token.save()
         ckt = Caketang.objects.get(pk=currentVote)
-        pil = Pemilih(nim=nim, token=current_token, date=submit_date, vote=ckt)
+        pil = Pemilih.objects.get(nim=nim, token=token)
+        pil.date = submit_date
+        pil.vote = ckt
         pil.save()
         response = JsonResponse({'nim':nim, 'token':token, 'pub_date':submit_date, 'currentVote':currentVote, 'redirect_to': '/'})
         response.delete_cookie('nim')
@@ -66,8 +68,10 @@ def submit_vote(request):
 
 @staff_member_required
 def generate_token(request):
-    niminput = json.loads(request.body["nim"])
-    pemilih = Pemilih.objects.filter(nim = nim) 
+    niminput = json.loads(request.body)["nim"]
+    pemilih = Pemilih.objects.filter(nim = niminput)[0]
+    if pemilih.token:
+        return JsonResponse({'token': pemilih.token})
     all_pemilih = Pemilih.objects.all()
     def gen():
         return binascii.hexlify(os.urandom(2)).decode()

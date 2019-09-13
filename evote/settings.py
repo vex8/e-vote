@@ -125,6 +125,7 @@ TATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
 
 django_heroku.settings(locals())
+del DATABASES['default']['OPTIONS']['sslmode']
 
 try:
     from .settings_local import *
