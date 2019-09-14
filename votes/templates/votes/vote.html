@@ -146,14 +146,14 @@
                     <div class="card-ornament top">
                         <span class="card-label">K</span>
                         <span class="card-number">1</span>
-                        <img class="logodoang" src="{% static "logodoang.png" %}"></img>
+                        <img class="logodoang"></img>
                     </div>
                     <div class="card-content">
                         <div class="muka-container">
                             <img class="muka"></img>
                         </div>
                         <div class="flex center" style="height: 100%;">
-                            <span class="nama">Bambang</span>
+                            <span class="nama"></span>
                         </div>
                     </div>
                     <div class="card-ornament rotated bottom">
@@ -190,8 +190,7 @@
                 if(!cktDataCurrent) break;
                 let kartu = document.importNode(document.querySelector('#kartu').content, true).querySelector('.caketang');
                 kartu.querySelector('.nama').innerText = cktDataCurrent.fields.nama;
-                n = i + 1;
-                kartu.querySelector('.muka').src="/static/"+n+".jpg";
+                kartu.querySelector('.muka').src="{% get_static_prefix %}"+(i+1)+".jpg";
                 kartu.querySelectorAll('.card-number').forEach(element => {
                     element.innerText = i+1;
                 });

@@ -100,7 +100,7 @@ input:active{
 }
 
 .card{
-  width: 12.5vw;
+  width: 12em;
   height: 17em;
   background: white;
   border-radius: .3em;
@@ -204,6 +204,7 @@ input:active{
   padding: 0;
   flex-flow: column;
   padding-bottom: .5em;
+  overflow: hidden;
 }
 
 .padding{
