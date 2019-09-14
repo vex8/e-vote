@@ -81,11 +81,22 @@
                 text-align: left;
                 margin: 0 .5em;
             }
+
+            .bold{
+                font-weight: bold;
+            }
+
             #vote{
                 writing-mode: vertical-rl;
                 text-orientation: upright;
                 font-size: 2em;
                 padding: .2em;
+            }
+
+            #ckt-prestasi{
+                display: block;
+                width: 500;
+                word-wrap: break-word;
             }
         </style>
     </head>
@@ -111,11 +122,11 @@
                     <div class="flex" style="flex: 2 0 auto;">
                         <div id="card-place"></div>
                         <div class="ckt-data-container">
-                            <span>Nama: </span><span id="ckt-nama"></span><br/>
-                            <span>TTL: </span><span id="ckt-ttl"></span><br/>
-                            <span>Visi: </span><br/><span id="ckt-visi"></span><br/>
-                            <span>Misi: </span><br/><span id="ckt-misi"></span><br/>
-                            <span>Prestasi: </span><br/><span id="ckt-prestasi"></span><br/>
+                            <span class="bold">Nama: </span><span id="ckt-nama"></span><br/>
+                            <span class="bold">TTL: </span><span id="ckt-ttl"></span><br/>
+                            <span class="bold">Visi: </span><br/><span id="ckt-visi"></span><br/>
+                            <span class="bold">Misi: </span><br/><span id="ckt-misi"></span><br/>
+                            <span class="bold">Prestasi: </span><br/><span id="ckt-prestasi"></span><br/>
                         </div>
                     </div>
                     <input type="button" value="VOTE" name="vote" id="vote">

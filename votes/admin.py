@@ -3,6 +3,7 @@ from .models import Caketang, Pemilih
 
 class PemilihAdmin(admin.ModelAdmin):
     list_display = ('nim', 'token', 'hasvoted', 'vote', 'date')
+    pass 
 
 admin.site.register(Caketang)
 admin.site.register(Pemilih)
