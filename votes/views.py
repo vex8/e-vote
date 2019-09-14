@@ -28,15 +28,16 @@ def check_token(request):
     pemilih = Pemilih.objects.filter(nim=identity['nim'])
     if len(pemilih) > 0:
         pemilih = pemilih[0]
-        if pemilih.hasvoted == True:
-            retcode = 1
-            retmes = 'You have already voted!'
         if pemilih.token == '':
             retcode = 1
             retmes = 'Invalid token in db, please contact admin'
         elif pemilih.token == identity['token']:
-            retcode = 4
-            retmes = 'Success!'
+            if pemilih.hasvoted == True:
+                retcode = 1
+                retmes = 'You have already voted!'
+            else:
+                retcode = 4
+                retmes = 'Success!'
         else:
             retcode = 1
             retmes = 'Token invalid!'
