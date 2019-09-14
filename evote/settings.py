@@ -123,6 +123,9 @@ USE_TZ = True
 TATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 django_heroku.settings(locals())
 del DATABASES['default']['OPTIONS']['sslmode']
