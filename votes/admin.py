@@ -3,8 +3,8 @@ from .models import Caketang, Pemilih
 
 class PemilihAdmin(admin.ModelAdmin):
     list_display = ('nim', 'token', 'hasvoted', 'vote', 'date')
-    pass 
+    search_fields = ['nim']
 
 admin.site.register(Caketang)
-admin.site.register(Pemilih)
+admin.site.register(Pemilih, PemilihAdmin)
 # Register your models here.
