@@ -58,10 +58,11 @@ def submit_vote(request):
         token = data['token']
         ckt = Caketang.objects.get(pk=currentVote)
         pil = Pemilih.objects.get(nim=nim, token=token)
+        pil.hasvoted = True
         pil.date = submit_date
         pil.vote = ckt
         pil.save()
-        response = JsonResponse({'nim':nim, 'token':token, 'pub_date':submit_date, 'currentVote':currentVote, 'redirect_to': '/'})
+        response = JsonResponse({'nim':nim, 'token':token, 'pub_date':submit_date, 'currentVote':currentVote,'redirect_to': '/'})
         response.delete_cookie('nim')
         response.delete_cookie('token')
         return response
