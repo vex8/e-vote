@@ -12,10 +12,10 @@ class Caketang(models.Model):
 
 class Pemilih(models.Model): 
     nim = models.CharField(max_length = 8)
-    token = models.CharField(max_length= 4, default='', null=True, blank=True)
+    token = models.CharField(max_length= 4, default='', null=True)
     hasvoted = models.BooleanField(default=False)
-    date = models.DateTimeField('date published', null=True, blank=True)
-    vote = models.ForeignKey(Caketang, on_delete=models.CASCADE, null=True, blank=True)
+    date = models.DateTimeField('date published', null=True)
+    vote = models.ForeignKey(Caketang, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return str(self.nim)
