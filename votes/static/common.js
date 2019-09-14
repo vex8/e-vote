@@ -41,3 +41,10 @@ function showPopup(popupEl){
 function unPopup(popupEl){
   popupEl.classList.remove('active');
 }
+function showPopupContent(popup, title, content){
+  let popupTitle = popup.querySelector('#popup-title');
+  let popupContent = popup.querySelector("#popup-content");
+  popupTitle.innerText = title;
+  popupContent.innerHTML = content;
+  showPopup(popup);
+}

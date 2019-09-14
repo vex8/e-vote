@@ -71,9 +71,12 @@ def submit_vote(request):
 @staff_member_required
 def generate_token(request):
     niminput = json.loads(request.body)["nim"]
-    pemilih = Pemilih.objects.filter(nim = niminput)[0]
+    pemilih = Pemilih.objects.filter(nim = niminput)
+    if len(pemilih)<1:
+        return JsonResponse({'code': 1, 'token': ''})
+    pemilih = pemilih[0]
     if pemilih.token:
-        return JsonResponse({'token': pemilih.token})
+        return JsonResponse({'code': 4,'token': pemilih.token})
     all_pemilih = Pemilih.objects.all()
     def gen():
         return binascii.hexlify(os.urandom(2)).decode()
@@ -82,7 +85,7 @@ def generate_token(request):
         gen_token = gen()
     pemilih.token = gen_token 
     pemilih.save()
-    return JsonResponse({'token': gen_token})
+    return JsonResponse({'code': 4, 'token': gen_token})
 
 @staff_member_required
 def generate_token_page(request):

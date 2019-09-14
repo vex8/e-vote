@@ -6,9 +6,11 @@
   <head>
     <title>DUAR.... TOKEN</title>
     <script src="{% static "common.js" %}"></script>
+    <link rel="stylesheet" href="{% static "common.css"%}"></lin>
     <style>
       body{
         background: red;
+        margin: revert;
       }
       #token, #niminput{
         font-size: 4em;
@@ -20,6 +22,7 @@
         color: black;
         border: 0;
         width: 100%;
+        padding: initial;
       }
       #niminput:hover{
         background: palegreen;
@@ -31,6 +34,7 @@
         background: aqua;
         color: black;
         border: 0;
+        padding: initial;
       }
       #generate:hover{
         background: #1196ff;
@@ -42,16 +46,29 @@
     </style>
   </head>
   <body>
-    <input type="text" id="niminput">
+    <input type="text" id="niminput" placeholder="16519xxx" maxlength="8">
     <span id="token"></span>
     <input type="button" value="DUAR... DAPET TOKEN" id="generate">
+    <div class="popup-container">
+      <div class="popup-bg"></div>
+      <div class="popup">
+        <h3 id="popup-title"></h3>
+        <p id="popup-content"></p>
+        <span id="popup-tip">Click anywhere to continue.</span>
+      </div>
+    </div>
     <script>
       var niminput = document.querySelector('#niminput');
       let currentToken = '';
       let token = document.querySelector('#token');
       let generate = document.querySelector('#generate');
+      let popup = document.querySelector('.popup-container');
+      popup.addEventListener('click', ()=>unPopup(popup));
       generate.addEventListener('click', ()=>{
         ajaxPromise('/generatetoken', JSON.stringify({"nim":niminput.value})).then((data) => {
+          if(data['code'] == 1){
+            showPopupContent(popup, 'Error!', 'nim doesn\'t exist');
+          }
           console.log(data);
           currentToken = data['token'];
           token.innerText = currentToken;

@@ -2,8 +2,6 @@ let tokenInput = document.querySelector('#token');
 let nimInput = document.querySelector('#nim');
 let submit = document.querySelector('#submit');
 let popup = document.querySelector('.popup-container');
-let popupTitle = document.querySelector('#popup-title');
-let popupContent = document.querySelector('#popup-content');
 
 submit.addEventListener('click', send);
 tokenInput.addEventListener('keydown', (e)=>{
@@ -17,6 +15,7 @@ function send(){
   let nim = nimInput.value;
   if(token.length < 4){
     showPopupContent(
+      popup,
       'Error!',
       'Token should be exactly 4 alphanumeric characters.'
     );
@@ -24,6 +23,7 @@ function send(){
   }
   if(isNaN(parseInt(nim))){
     showPopupContent(
+      popup,
       'Error!',
       'NIM should be only number'
     );
@@ -37,22 +37,17 @@ function send(){
     ))
     .then((data)=>{
       if(data['code'] == 1){ // our code 1 means error, show popup
-        showPopupContent('Error!', data['return']);
+        showPopupContent(popup, 'Error!', data['return']);
       }
       else if(data['code']==4){ // our code 4 means OK, proceed
-        showPopupContent('Success!', data['return']);
+        showPopupContent(popup, 'Success!', data['return']);
         window.location.href = '/vote';
       }
     }).catch((error) => {
-      showPopupContent('Error!', error);
+      showPopupContent(popup, 'Error!', error);
     });
 }
 
-function showPopupContent(title, content){
-  popupTitle.innerText = title;
-  popupContent.innerHTML = content;
-  showPopup(popup);
-}
 popup.addEventListener('click', ()=>{
   unPopup(popup);
 });
