@@ -188,7 +188,7 @@
                 if(!cktDataCurrent) break;
                 let kartu = document.importNode(document.querySelector('#kartu').content, true).querySelector('.caketang');
                 kartu.querySelector('.nama').innerText = cktDataCurrent.fields.nama;
-                kartu.querySelector('.muka').src=i+".jpg";
+                kartu.querySelector('.muka').src="/static"+i+".jpg";
                 kartu.querySelectorAll('.card-number').forEach(element => {
                     element.innerText = i+1;
                 });
